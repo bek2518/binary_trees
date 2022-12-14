@@ -14,8 +14,8 @@ size_t binary_tree_height_mod(const binary_tree_t *tree)
 		return (0);
 	}
 
-	counter_left = binary_tree_height(tree->left);
-	counter_right = binary_tree_height(tree->right);
+	counter_left = binary_tree_height_mod(tree->left);
+	counter_right = binary_tree_height_mod(tree->right);
 
 	if (counter_left > counter_right)
 	{
