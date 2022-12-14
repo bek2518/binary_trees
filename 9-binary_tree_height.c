@@ -29,5 +29,5 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	{
 		counter = counter_left;
 	}
-	return (++counter);
+	return (counter + 1);
 }
