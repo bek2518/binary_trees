@@ -27,13 +27,13 @@ bst_t *bst_insert(bst_t **tree, int value)
 			return (*tree = tempNode);
 		}
 
-		if (tempNode->n < root->n)
+		if (value < root->n)
 		{
 			if (root->left != NULL)
 				return (bst_insert(&root->left, value));
 			return (root->left = tempNode);
 		}
-		if (tempNode->n > root->n)
+		if (value > root->n)
 		{
 			if (root->right != NULL)
 				return (bst_insert(&root->right, value));
