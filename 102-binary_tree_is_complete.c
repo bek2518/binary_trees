@@ -7,27 +7,29 @@
 */
 size_t binary_tree_nodes2(const binary_tree_t *tree)
 {
-        size_t counter_left = 0, counter_right = 0, counter = 0;
+	size_t counter_left = 0, counter_right = 0, counter = 0;
 
-        if (tree == NULL)
-        {
-                return (0);
-        }
+	if (tree == NULL)
+	{
+		return (0);
+	}
 
-        counter_left = binary_tree_nodes2(tree->left);
-        counter_right = binary_tree_nodes2(tree->right);
+	counter_left = binary_tree_nodes2(tree->left);
+	counter_right = binary_tree_nodes2(tree->right);
 
-        counter = counter_left + counter_right + 1;
-        return (counter);
+	counter = counter_left + counter_right + 1;
+	return (counter);
 }
 
 /**
  * is_complete - checks if a tree is complete or not
+ * @tree: pointer to the root node of the tree to check
  * @index: index of the tree to cke
  * @number_nodes: count of nodes in the tree
  * Return: true if the tree is complete or NULL and false otherwise
 */
-bool is_complete(const binary_tree_t *tree, unsigned int index, unsigned int number_nodes)
+bool is_complete(const binary_tree_t *tree, unsigned int index,
+			unsigned int number_nodes)
 {
 	if (tree == NULL)
 	{
@@ -38,8 +40,8 @@ bool is_complete(const binary_tree_t *tree, unsigned int index, unsigned int num
 		return (false);
 	}
 
-	return ( is_complete(tree->left, 2*index + 1, number_nodes) && 
-	is_complete(tree->right, 2*index + 2, number_nodes));
+	return (is_complete(tree->left, 2 * index + 1, number_nodes) &&
+	is_complete(tree->right, 2 * index + 2, number_nodes));
 }
 
 /**
@@ -59,5 +61,5 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	{
 		return (0);
 	}
-	return(is_complete(tree, index, number_nodes));
+	return (is_complete(tree, index, number_nodes));
 }
