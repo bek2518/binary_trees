@@ -43,6 +43,10 @@ bst_t *bst_insert(bst_t **tree, int value)
 				return (bst_insert(&root->right, value));
 			return (root->right = tempNode);
 		}
+		if (value == root->n)
+		{
+			return (0);
+		}
 	}
 	return (NULL);
 }
