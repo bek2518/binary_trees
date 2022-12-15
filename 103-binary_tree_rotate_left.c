@@ -13,7 +13,7 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
 
 	if (tree == NULL || tree->right == NULL)
 	{
-		return NULL;
+		return (NULL);
 	}
 
 	tempNode_root = tree;
