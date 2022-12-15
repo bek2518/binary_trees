@@ -27,20 +27,20 @@ bst_t *bst_insert(bst_t **tree, int value)
 
 		if (value < root->n)
 		{
+			if (root->left != NULL)
+				return (bst_insert(&root->left, value));
 			tempNode = binary_tree_node(root, value);
 			if (tempNode == NULL)
 				return (NULL);
-			if (root->left != NULL)
-				return (bst_insert(&root->left, value));
 			return (root->left = tempNode);
 		}
 		if (value > root->n)
 		{
+			if (root->right != NULL)
+				return (bst_insert(&root->right, value));
 			tempNode = binary_tree_node(root, value);
 			if (tempNode == NULL)
 				return (NULL);
-			if (root->right != NULL)
-				return (bst_insert(&root->right, value));
 			return (root->right = tempNode);
 		}
 		if (value == root->n)
