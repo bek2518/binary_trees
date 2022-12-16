@@ -5,26 +5,33 @@
 /**
  * main - Entry point
  *
- * Return: Always 0 (Success)
+ * Return: 0 on success, error code on failure
  */
 int main(void)
 {
-    binary_tree_t *root;
-    int full;
+    bst_t *tree;
+    int array[] = {
+        79, 47, 68, 87, 84, 91, 21, 32, 34, 2,
+        20, 22, 98, 1, 62, 95
+    };
+    size_t n = sizeof(array) / sizeof(array[0]);
 
-    root = binary_tree_node(NULL, 98);
-    root->left = binary_tree_node(root, 12);
-    root->right = binary_tree_node(root, 402);
-    binary_tree_insert_right(root->left, 54);
-    binary_tree_insert_right(root, 128);
-    root->left->left = binary_tree_node(root->left, 10);
-    binary_tree_print(root);
+    tree = array_to_bst(array, n);
+    if (!tree)
+        return (1);
+    binary_tree_print(tree);
 
-    full = binary_tree_is_full(root);
-    printf("Is %d full: %d\n", root->n, full);
-    full = binary_tree_is_full(root->left);
-    printf("Is %d full: %d\n", root->left->n, full);
-    full = binary_tree_is_full(root->right);
-    printf("Is %d full: %d\n", root->right->n, full);
+    tree = bst_remove(tree, 79);
+    printf("Removed 79...\n");
+    binary_tree_print(tree);
+
+    tree = bst_remove(tree, 21);
+    printf("Removed 21...\n");
+    binary_tree_print(tree);
+
+    tree = bst_remove(tree, 68);
+    printf("Removed 68...\n");
+    binary_tree_print(tree);
+    binary_tree_delete(tree);
     return (0);
 }
