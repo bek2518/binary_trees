@@ -1,23 +1,13 @@
 #include "binary_trees.h"
 
-int successor(bst_t *root) 
+bst_t *successor(bst_t *root) 
 {
-  root = root->right;
-  while (root->left != NULL)
-  	{
-		root = root->left;
-	}
-  return root->n;
-}
-
-int predecessor(bst_t *root)
-{
-	root = root->left;
-	while (root->right!= NULL)
+	bst_t *current = root;
+	while (current && current->left != NULL)
 	{
-		root = root->right;
+		current = current->left;
 	}
-	return root->n;
+	return (current);
 }
 
 /**
@@ -30,34 +20,35 @@ bst_t *bst_remove(bst_t *root, int value)
 {
 	if (root == NULL)
 	{
-		return (NULL);
+		return (root);
 	}
 	if (value > root->n)
 	{
-		root = root->right;
-		bst_remove(root, value);
+		root->right = bst_remove(root->right, value);
 	}
 	else if (value < root->n)
 	{
-		root = root->left;
-		bst_remove(root, value);
+		root->left = bst_remove(root->left, value);
 	}
 	else
 	{
-		if (root->left == NULL && root->right == NULL)
+		bst_t *temp;
+		if (root->left == NULL)
 		{
-			root = NULL;
+			bst_t *temp = root->right;
+			free(root);
+			return (temp);
 		}
-		else if (root->right != NULL)
+		if (root->right == NULL)
 		{
-			root->n = successor(root);
-			bst_remove(root->right, root->n);
+			bst_t *temp = root->left;
+			free(root);
+			return (temp);
 		}
-		else
-		{
-			root->n = predecessor(root);
-			bst_remove(root->left, root->n);
-		}
+
+		temp = successor(root->right);
+		root->n = temp->n;
+		root->right = bst_remove(root->right, temp->n);
 	}
 	return (root);
 }
