@@ -5,26 +5,26 @@
 /**
  * main - Entry point
  *
- * Return: 0 on success, error code on failure
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-    bst_t *tree;
-    int array[] = {
-        79, 47, 68, 87, 84, 91, 21, 32, 34, 2,
-        20, 22, 98, 1, 62, 95
-    };
-    size_t n = sizeof(array) / sizeof(array[0]);
-    bst_t *node;
+    binary_tree_t *root;
+    int full;
 
-    tree = array_to_bst(array, n);
-    if (!tree)
-        return (1);
-    binary_tree_print(tree);
-    node = bst_search(tree, 32);
-    printf("Found: %d\n", node->n);
-    binary_tree_print(node);
-    node = bst_search(tree, 512);
-    printf("Node should be nil -> %p\n", (void *)node);
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    binary_tree_insert_right(root->left, 54);
+    binary_tree_insert_right(root, 128);
+    root->left->left = binary_tree_node(root->left, 10);
+    binary_tree_print(root);
+
+    full = binary_tree_is_full(root);
+    printf("Is %d full: %d\n", root->n, full);
+    full = binary_tree_is_full(root->left);
+    printf("Is %d full: %d\n", root->left->n, full);
+    full = binary_tree_is_full(root->right);
+    printf("Is %d full: %d\n", root->right->n, full);
     return (0);
 }
